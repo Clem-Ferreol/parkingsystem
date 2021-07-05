@@ -43,12 +43,11 @@ public class ParkingService {
 				// ticket.setId(ticketID);
 				ticket.setParkingSpot(parkingSpot);
 				ticket.setVehicleRegNumber(vehicleRegNumber);
-				if(isEligibleForDiscount(vehicleRegNumber)) {
-					ticket.setPrice(-1);
+				
+				if(ticket.isEligibleForDiscount()) {
 					System.out.println("Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
-				} else {
-					ticket.setPrice(0);
 				}
+				
 				ticket.setInTime(inTime);
 				ticket.setOutTime(null);
 				ticketDAO.saveTicket(ticket);
@@ -64,17 +63,6 @@ public class ParkingService {
 	private String getVehichleRegNumber() throws Exception {
 		System.out.println("Please type the vehicle registration number and press enter key");
 		return inputReaderUtil.readVehicleRegistrationNumber();
-	}
-
-	public Boolean isEligibleForDiscount(String registrationDate) {
-
-		Ticket previousTicket = ticketDAO.getTicket(registrationDate);
-		if (previousTicket != null) {
-			return true;
-		} else {
-			return false;
-		}
-
 	}
 
 	public ParkingSpot getNextParkingNumberIfAvailable() {

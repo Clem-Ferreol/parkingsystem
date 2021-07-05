@@ -3,6 +3,8 @@ package com.parkit.parkingsystem.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.parkit.parkingsystem.dao.TicketDAO;
+
 public class Ticket {
     private int id;
     private ParkingSpot parkingSpot;
@@ -58,4 +60,15 @@ public class Ticket {
     public void setOutTime(Date outTime) {
         this.outTime = outTime;
     }
+    
+    public Boolean isEligibleForDiscount() {
+    	TicketDAO ticketDAO = new TicketDAO();
+    	
+		Ticket previousTicket = ticketDAO.getTicket(this.vehicleRegNumber);
+		if (previousTicket != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
