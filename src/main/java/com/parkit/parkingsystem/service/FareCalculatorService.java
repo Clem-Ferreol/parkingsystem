@@ -20,8 +20,7 @@ public class FareCalculatorService {
         if(duration < 0.5) {
         	duration = 0;
         }
-        
-        Boolean isEligibleForDiscount = ticket.getPrice() == -1;
+       
 
         switch (ticket.getParkingSpot().getParkingType()){
             case CAR: {
@@ -35,11 +34,11 @@ public class FareCalculatorService {
             default: throw new IllegalArgumentException("Unkown Parking Type");
         }
         
-        if(isEligibleForDiscount) {
-        	double discount = ticket.getPrice() * 0.05;
+        //Check if we have to apply the discount
+        if(ticket.isEligibleForDiscount()) {
+			double discount = ticket.getPrice() * 0.05;
         	ticket.setPrice(ticket.getPrice() - discount);
-        }
-        
-        
+		}
+
     }
 }
