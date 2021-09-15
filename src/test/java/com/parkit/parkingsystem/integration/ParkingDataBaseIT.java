@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -73,10 +74,12 @@ public class ParkingDataBaseIT {
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
         
-        Ticket ticket = ticketDAO.getTicket("ABCDEF");
+    	Ticket ticket = ticketDAO.getTicket("ABCDEF");
     	assertNotEquals(ticket, null);
     	//Price should be free because the execution of the test is less than 30 minutes
     	assertEquals(ticket.getPrice(), 0);
+    	//Check if out time is null
+    	assertNotNull(ticketDAO.getTicket("ABCDEF").getOutTime());
     }
 
 }
