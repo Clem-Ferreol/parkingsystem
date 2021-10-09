@@ -57,13 +57,13 @@ public class ParkingServiceTest {
         parkingService.processExitingVehicle();
     }
     
-    @Test
+    /*@Test
     public void processIncomingVehicleWithDiscountTest(){
     	when(inputReaderUtil.readSelection()).thenReturn(1);
     	//ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
     	//when(parkingService.getNextParkingNumberIfAvailable()).thenReturn(parkingSpot);
     	
         parkingService.processIncomingVehicle();
-    }
+    }*/
 
 }
